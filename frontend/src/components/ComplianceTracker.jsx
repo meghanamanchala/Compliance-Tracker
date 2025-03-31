@@ -10,7 +10,7 @@ const ComplianceTracker = () => {
     useEffect(() => {
         const fetchRecords = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/compliances");
+                const response = await fetch("https://compliance-tracker-vw7x.onrender.com/api/compliances");
                 const data = await response.json();
                 setComplianceRecords(data);
             } catch (error) {
