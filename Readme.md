@@ -20,7 +20,7 @@ A web-based compliance management system built with **React (Frontend)** and **F
 ## Installation
 ### **1. Clone the Repository**
 ```sh
-git clone https://github.com/your-username/compliance-tracker.git
+git clone https://github.com/meghanamanchala/Compliance-Tracker.git
 cd compliance-tracker
 ```
 
