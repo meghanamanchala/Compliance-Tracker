@@ -12,20 +12,21 @@ const ComplianceTracker = () => {
             try {
                 const response = await fetch("https://compliance-tracker-vw7x.onrender.com/api/compliances");
                 const data = await response.json();
+                console.log("Fetched compliance records:", data); // Debugging
     
                 if (Array.isArray(data)) {
-                    setComplianceRecords(data); // Ensure setting only once
+                    setComplianceRecords(data);
                 } else {
-                    console.error("API response is not an array:", data);
                     setComplianceRecords([]);
                 }
             } catch (error) {
                 console.error("Error fetching compliance records:", error);
             }
         };
-        
+    
         fetchRecords();
-    }, []); // Empty dependency array ensures it runs only once
+    }, []);
+    // Empty dependency array ensures it runs only once
     
 
     const handleSave = async (formData) => {
