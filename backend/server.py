@@ -43,5 +43,36 @@ def get_compliances():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+users_collection = mongo.db.users
+
+# Register API
+@app.route("/api/register", methods=["POST"])
+def register():
+    try:
+        data = request.json
+        existing_user = users_collection.find_one({"email": data["email"]})
+
+        if existing_user:
+            return jsonify({"message": "User already exists"}), 400
+
+        users_collection.insert_one({"email": data["email"], "password": data["password"], "role": data["role"]})
+        return jsonify({"message": "User registered successfully"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Login API
+@app.route("/api/login", methods=["POST"])
+def login():
+    try:
+        data = request.json
+        user = users_collection.find_one({"email": data["email"]})
+
+        if not user or user["password"] != data["password"]:
+            return jsonify({"message": "Invalid email or password"}), 401
+
+        return jsonify({"message": "Login successful", "role": user["role"]}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500 
+               
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=True)
