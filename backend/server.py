@@ -4,7 +4,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": ["http://localhost:5173", "https://compilance-tracker-28.vercel.app"]}})
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 
 # Load MongoDB URI (use local if not set)
