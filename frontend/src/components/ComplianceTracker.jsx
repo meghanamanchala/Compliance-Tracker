@@ -15,18 +15,25 @@ const ComplianceTracker = () => {
             .catch(err => console.error("Error fetching records:", err));
     }, []);
 
-    const handleSave = (formData) => {
-        fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-        })
-        .then(() => setComplianceRecords([...complianceRecords, formData]))
-        .catch(err => console.error("Error saving record:", err));
-
+    const handleSave = async (formData) => {
+        try {
+            await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+    
+            // ✅ Instead of manually adding, re-fetch updated records
+            const res = await fetch(API_URL);
+            const updatedRecords = await res.json();
+            setComplianceRecords(updatedRecords);
+        } catch (err) {
+            console.error("Error saving record:", err);
+        }
+    
         setActiveForm(null);
     };
-
+    
     return (
         <div className="p-6 max-w-7xl mx-auto bg-white rounded shadow-md">
             <div className="flex justify-end gap-2 mb-4">
