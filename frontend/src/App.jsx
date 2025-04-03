@@ -7,7 +7,7 @@ import Navbar from "./pages/Navbar";
 
 const App = () => {
   const [userRole, setUserRole] = useState(null);
-  const [page, setPage] = useState("login"); // "login" or "register"
+  const [page, setPage] = useState("login"); 
 
   useEffect(() => {
     const storedRole = localStorage.getItem("userRole");

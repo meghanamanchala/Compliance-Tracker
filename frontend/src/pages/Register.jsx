@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Register = ({ onPageChange }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("auditor"); // Default role
+  const [role, setRole] = useState("auditor"); 
   const [message, setMessage] = useState("");
 
   const handleRegister = async (e) => {

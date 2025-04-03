@@ -23,7 +23,6 @@ const ComplianceTracker = () => {
                 body: JSON.stringify(formData)
             });
     
-            // ✅ Instead of manually adding, re-fetch updated records
             const res = await fetch(API_URL);
             const updatedRecords = await res.json();
             setComplianceRecords(updatedRecords);

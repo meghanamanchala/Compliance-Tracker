@@ -43,8 +43,8 @@ const ComplianceForm = ({ onClose, onSave, categories = ["Test", "Testing Compli
             });
             if (response.ok) {
                 alert("Compliance saved successfully!");
-                onSave(formData); // Update frontend state
-                onClose(); // Close form
+                onSave(formData);
+                onClose();
             } else {
                 alert("Error saving compliance");
             }

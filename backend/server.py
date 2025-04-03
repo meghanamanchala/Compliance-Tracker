@@ -7,20 +7,16 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 
-# Load MongoDB URI (use local if not set)
 app.config["MONGO_URI"] = os.getenv("MONGO_URI", "mongodb://localhost:27017/compliance_db")
 mongo = PyMongo(app)
 
-# Ensure MongoDB connection is established
 if mongo.db is None:
     print("Error: MongoDB connection failed!")
 else:
     print("✅ Connected to MongoDB")
 
-# Define collection reference correctly
 compliance_collection = mongo.db.compliances
 
-# API to save compliance
 @app.route("/api/compliances", methods=["POST"])
 def save_compliance():
     try:
@@ -34,7 +30,6 @@ def save_compliance():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# API to fetch all compliances
 @app.route("/api/compliances", methods=["GET"])
 def get_compliances():
     try:
@@ -45,7 +40,6 @@ def get_compliances():
 
 users_collection = mongo.db.users
 
-# Register API
 @app.route("/api/register", methods=["POST"])
 def register():
     try:
@@ -60,7 +54,6 @@ def register():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Login API
 @app.route("/api/login", methods=["POST"])
 def login():
     try:
